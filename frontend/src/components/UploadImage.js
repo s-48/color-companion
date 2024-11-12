@@ -25,7 +25,7 @@ const UploadImage = () => {
 
     try {
       setUploadStatus('Uploading...');
-      const response = await axios.post('http://localhost:5000/upload', formData);
+      const response = await axios.post('http://localhost:5001/upload', formData);
       setUploadStatus('Upload successful! Image URL: ' + response.data.imageUrl);
     } catch (error) {
       setUploadStatus('Upload failed! Please try again.');
