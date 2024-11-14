@@ -1,8 +1,9 @@
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const cors = require('cors'); 
+const openaiRoutes = require('./routes/openaiRoutes'); 
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -20,6 +21,7 @@ app.use(cors({
   methods: 'GET,POST',             // Allow specific HTTP methods
   allowedHeaders: 'Content-Type',  // Allow specific headers
 }));
+app.use(openaiRoutes)
 
 // Cloudinary configuration
 cloudinary.config({
