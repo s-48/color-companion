@@ -8,10 +8,16 @@ const openai = new OpenAIApi(new Configuration({
 
 router.post('/api/generate-text', async (req, res) => {
   try {
-    const { prompt } = req.body;
+    const { systemMessage, userMessage } = req.body;
+
+    const messages = [
+      { role: 'system', content: systemMessage }, 
+      { role: 'user', content: userMessage }  
+    ];
+
     const response = await openai.createChatCompletion({
-      model: 'gpt-4o',
-      messages: [{ role: 'user', content: prompt }],
+      model: 'gpt-4o', 
+      messages: messages,
     });
 
     res.json({ response: response.data.choices[0].message.content });

@@ -3,13 +3,31 @@ import React, { useState } from 'react';
 function UserPrompt() {
   const [question, setQuestion] = useState('');
   const [personality, setPersonality] = useState('helpful assistant');
+  const [response, setResponse] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Question:', question);
-    console.log('Personality:', personality);
-    // You could add a function here to send these inputs to your backend or OpenAI API
+    try {
+      const systemMessage = `You are a ${personality}.`;
+      const userMessage = question;
+
+      // Send both the system message and the user's question to the backend
+      const res = await fetch('/api/generate-text', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          systemMessage,  // Adding system message
+          userMessage,    // Adding user question
+        }),
+      });
+
+      const data = await res.json();
+      setResponse(data.response);
+    } catch (error) {
+      console.error('Error generating response:', error);
+    }
   };
 
   return (
@@ -37,6 +55,13 @@ function UserPrompt() {
         </div>
         <button type="submit">Submit</button>
       </form>
+
+      {response && (
+        <div className="response">
+          <h3>AI Response:</h3>
+          <p>{response}</p>
+        </div>
+      )}
     </div>
   );
 }
