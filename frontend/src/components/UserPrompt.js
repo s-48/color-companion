@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 
 function UserPrompt() {
-  const [question, setQuestion] = useState('');
-  const [personality, setPersonality] = useState('helpful assistant');
-  const [response, setResponse] = useState('');
+  const [question, setQuestion] = useState('');  // Store user's question
+  const [personality, setPersonality] = useState('helpful assistant'); // Store AI personality
+  const [response, setResponse] = useState('');  // Store the AI's response
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();  // Prevent default form submission
     try {
-      const systemMessage = `You are a ${personality}.`;
-      const userMessage = question;
+      const systemMessage = `You are a ${personality}.`;  // Define system message
+      const userMessage = question;  // Define user message
 
       // Send both the system message and the user's question to the backend
-      const res = await fetch('/api/generate-text', {
+      const res = await fetch('http://localhost:5001/generate-text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,10 +23,10 @@ function UserPrompt() {
         }),
       });
 
-      const data = await res.json();
-      setResponse(data.response);
+      const data = await res.json();  // Parse the response
+      setResponse(data.response);  // Set the response in the state
     } catch (error) {
-      console.error('Error generating response:', error);
+      console.error('Error generating response:', error);  // Handle errors
     }
   };
 
@@ -39,7 +39,7 @@ function UserPrompt() {
             type="text"
             id="question"
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            onChange={(e) => setQuestion(e.target.value)}  // Update the question state
             placeholder="Enter your question here"
           />
         </div>
@@ -49,7 +49,7 @@ function UserPrompt() {
             type="text"
             id="personality"
             value={personality}
-            onChange={(e) => setPersonality(e.target.value)}
+            onChange={(e) => setPersonality(e.target.value)}  // Update the personality state
             placeholder="e.g., friendly, informative"
           />
         </div>
@@ -59,7 +59,7 @@ function UserPrompt() {
       {response && (
         <div className="response">
           <h3>AI Response:</h3>
-          <p>{response}</p>
+          <p>{response}</p>  {/* Display the AI's response */}
         </div>
       )}
     </div>

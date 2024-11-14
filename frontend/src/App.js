@@ -1,6 +1,6 @@
 import React from 'react';
 import UploadImage from './components/UploadImage';
-import UserPrompt from '../components/UserPrompt';
+import UserPrompt from './components/UserPrompt';
 function App() {
   return (
     <div className="App">
