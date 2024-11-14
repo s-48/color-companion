@@ -3,7 +3,8 @@ const express = require('express');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const cors = require('cors'); 
-const openaiRoutes = require('./routes/openaiRoutes'); 
+const { OpenAI } = require('openai');
+// const openaiRoutes = require('./routes/openaiRoutes'); 
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -21,7 +22,8 @@ app.use(cors({
   methods: 'GET,POST',             // Allow specific HTTP methods
   allowedHeaders: 'Content-Type',  // Allow specific headers
 }));
-app.use(openaiRoutes)
+// app.use(openaiRoutes)
+app.use(express.json());
 
 // Cloudinary configuration
 cloudinary.config({
@@ -66,6 +68,39 @@ app.post('/upload', upload.single('image'), (req, res) => {
     res.status(500).json({ error: 'File buffer missing' });
   }
 });
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+app.post('/generate-text', async (req, res) => {
+  try {
+    const { systemMessage, userMessage } = req.body;
+
+    const messages = [
+      { role: 'system', content: systemMessage },
+      { role: 'user', content: userMessage }
+    ];
+
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4',  // Correct model name
+      messages: messages
+    });
+
+    console.log('OpenAI Response:', response); 
+
+    if (response && response.choices && response.choices[0]) {
+      res.json({ response: response.choices[0].message.content });
+    } else {
+      console.error('Error: No choices in OpenAI response');
+      res.status(500).json({ error: 'Error: No choices in OpenAI response' });
+    }
+  } catch (error) {
+    console.error("Error calling OpenAI API:", error);
+    res.status(500).json({ error: 'Error generating text' });
+  }
+});
+
 
 // Start the server
 app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
