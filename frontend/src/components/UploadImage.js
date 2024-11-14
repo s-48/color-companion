@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UploadImage = () => {
+const UploadImage = ({ setImageUrl }) => {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [uploadStatus, setUploadStatus] = useState('');
@@ -27,6 +27,7 @@ const UploadImage = () => {
       setUploadStatus('Uploading...');
       const response = await axios.post('http://localhost:5001/upload', formData);
       setUploadStatus('Upload successful! Image URL: ' + response.data.imageUrl);
+      setImageUrl(response.data.imageUrl);
     } catch (error) {
       setUploadStatus('Upload failed! Please try again.');
     }

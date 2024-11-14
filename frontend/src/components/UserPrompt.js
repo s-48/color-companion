@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
 
-function UserPrompt() {
+function UserPrompt({ imageUrl }) {
   const [question, setQuestion] = useState('');  // Store user's question
   const [personality, setPersonality] = useState('helpful assistant'); // Store AI personality
   const [response, setResponse] = useState('');  // Store the AI's response
+  const [isLoading, setIsLoading] = useState(false);  // Track loading state
+  const [error, setError] = useState('');  // Track error state
 
   const handleSubmit = async (e) => {
     e.preventDefault();  // Prevent default form submission
+
+    // Validation: Ensure there's a question and image URL
+    if (!question || !imageUrl) {
+      alert('Please provide a question and upload an image.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError(''); // Reset any previous errors
+
     try {
       const systemMessage = `You are a ${personality}.`;  // Define system message
       const userMessage = question;  // Define user message
@@ -19,14 +31,22 @@ function UserPrompt() {
         },
         body: JSON.stringify({
           systemMessage,  // Adding system message
-          userMessage,    // Adding user question
+          userMessage, 
+          imageUrl,   // Adding user question
         }),
       });
+
+      if (!res.ok) {
+        throw new Error('Failed to generate response from the server.');
+      }
 
       const data = await res.json();  // Parse the response
       setResponse(data.response);  // Set the response in the state
     } catch (error) {
       console.error('Error generating response:', error);  // Handle errors
+      setError('Something went wrong. Please try again later.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -53,9 +73,10 @@ function UserPrompt() {
             placeholder="e.g., friendly, informative"
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={isLoading}>Submit</button>
       </form>
 
+      {error && <p className="error">{error}</p>} {/* Display error message */}
       {response && (
         <div className="response">
           <h3>AI Response:</h3>

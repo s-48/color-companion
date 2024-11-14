@@ -75,32 +75,40 @@ const openai = new OpenAI({
 
 app.post('/generate-text', async (req, res) => {
   try {
-    const { systemMessage, userMessage } = req.body;
+    const { systemMessage, userMessage, imageUrl } = req.body;
 
-    const messages = [
-      { role: 'system', content: systemMessage },
-      { role: 'user', content: userMessage }
-    ];
+    // Construct the prompt with imageUrl and personality
+    const prompt = `${systemMessage} The user asks: "${userMessage}" about the image: ${imageUrl}`;
 
-    const response = await openai.chat.completions.create({
-      model: 'gpt-4',  // Correct model name
-      messages: messages
+    // Call OpenAI API (chat-completions)
+    const openaiResponse = await openai.chat.completions.create({
+      model: 'gpt-4o', // Specify the model (gpt-4 or gpt-3.5)
+      messages: [
+        { role: 'system', content: systemMessage },  // System message to set context
+        { role: 'user', content: userMessage },      // User's question
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "image_url",
+              "image_url": {
+                "url": `${imageUrl}`
+              },
+            },
+          ],
+        }
+      ],
+      max_tokens: 300,
     });
+    // Send the response from OpenAI back to the client
+    res.json({ response: openaiResponse.choices[0].message.content });
 
-    console.log('OpenAI Response:', response); 
-
-    if (response && response.choices && response.choices[0]) {
-      res.json({ response: response.choices[0].message.content });
-    } else {
-      console.error('Error: No choices in OpenAI response');
-      res.status(500).json({ error: 'Error: No choices in OpenAI response' });
-    }
   } catch (error) {
-    console.error("Error calling OpenAI API:", error);
-    res.status(500).json({ error: 'Error generating text' });
+    console.error("Error generating response:", error);
+    res.status(500).json({ error: 'Error generating response' });
   }
-});
 
+});
 
 // Start the server
 app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
