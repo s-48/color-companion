@@ -8,11 +8,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       </header>
-        <h1>Image Upload App</h1>
-
           <div className="home-page">
-            <h1>Welcome to the Image Upload App</h1>
-
             {/* Pass the setImageUrl function as a prop */}
             <UploadImage setImageUrl={setImageUrl} />
             {/* Allow users to submit a custom URL */}
