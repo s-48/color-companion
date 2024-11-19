@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UploadImage = ({ setImageUrl }) => {
+const UploadImage = ({ setImageUrl, setChatStage }) => {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [uploadStatus, setUploadStatus] = useState('');
@@ -26,8 +26,9 @@ const UploadImage = ({ setImageUrl }) => {
     try {
       setUploadStatus('Uploading...');
       const response = await axios.post('http://localhost:5001/upload', formData);
-      setUploadStatus('Upload successful! Image URL: ' + response.data.imageUrl);
-      setImageUrl(response.data.imageUrl);
+      setUploadStatus('Upload successful!');
+      setImageUrl(response.data.imageUrl); // Update image URL in the parent component
+      setChatStage(1); // Move to the next chat stage
     } catch (error) {
       setUploadStatus('Upload failed! Please try again.');
     }

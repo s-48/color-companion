@@ -1,38 +1,35 @@
 import React, { useState } from 'react';
 
-function UserPrompt({ imageUrl }) {
-  const [question, setQuestion] = useState('');  // Store user's question
-  const [personality, setPersonality] = useState('helpful assistant'); // Store AI personality
-  const [response, setResponse] = useState('');  // Store the AI's response
-  const [isLoading, setIsLoading] = useState(false);  // Track loading state
-  const [error, setError] = useState('');  // Track error state
+function UserPrompt({ imageUrl, setChatStage, setResponse }) {
+  const [question, setQuestion] = useState('');
+  const [personality, setPersonality] = useState('helpful assistant');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();  // Prevent default form submission
+    e.preventDefault();
 
-    // Validation: Ensure there's a question and image URL
     if (!question || !imageUrl) {
       alert('Please provide a question and upload an image.');
       return;
     }
 
     setIsLoading(true);
-    setError(''); // Reset any previous errors
+    setError('');
 
     try {
-      const systemMessage = `You are a ${personality}.`;  // Define system message
-      const userMessage = question;  // Define user message
+      const systemMessage = `You are a ${personality}.`;
+      const userMessage = question;
 
-      // Send both the system message and the user's question to the backend
       const res = await fetch('http://localhost:5001/generate-text', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          systemMessage,  // Adding system message
-          userMessage, 
-          imageUrl,   // Adding user question
+          systemMessage,
+          userMessage,
+          imageUrl,
         }),
       });
 
@@ -40,10 +37,11 @@ function UserPrompt({ imageUrl }) {
         throw new Error('Failed to generate response from the server.');
       }
 
-      const data = await res.json();  // Parse the response
-      setResponse(data.response);  // Set the response in the state
+      const data = await res.json();
+      setResponse(data.response); // Update response in parent
+      setChatStage(2); // Transition to chatStage 2
     } catch (error) {
-      console.error('Error generating response:', error);  // Handle errors
+      console.error('Error generating response:', error);
       setError('Something went wrong. Please try again later.');
     } finally {
       setIsLoading(false);
@@ -59,7 +57,7 @@ function UserPrompt({ imageUrl }) {
             type="text"
             id="question"
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}  // Update the question state
+            onChange={(e) => setQuestion(e.target.value)}
             placeholder="Enter your question here"
           />
         </div>
@@ -69,20 +67,13 @@ function UserPrompt({ imageUrl }) {
             type="text"
             id="personality"
             value={personality}
-            onChange={(e) => setPersonality(e.target.value)}  // Update the personality state
+            onChange={(e) => setPersonality(e.target.value)}
             placeholder="e.g., friendly, informative"
           />
         </div>
         <button type="submit" disabled={isLoading}>Submit</button>
       </form>
-
-      {error && <p className="error">{error}</p>} {/* Display error message */}
-      {response && (
-        <div className="response">
-          <h3>AI Response:</h3>
-          <p>{response}</p>  {/* Display the AI's response */}
-        </div>
-      )}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }
