@@ -38,9 +38,12 @@ const UploadImage = ({ setImageUrl, setChatStage }) => {
     <div className="upload-container">
       <input type="file" accept="image/*" onChange={handleImageChange} />
       {previewUrl && (
-        <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} />
+        <div>
+          <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} />
+          {/* Render the button only if an image is staged */}
+          <button onClick={handleUpload}>Upload Image</button>
+        </div>
       )}
-      <button onClick={handleUpload}>Upload Image</button>
       {uploadStatus && <p>{uploadStatus}</p>}
     </div>
   );
