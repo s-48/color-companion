@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import UploadImage from './components/UploadImage';
+import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
 function App() {
   const [imageUrl, setImageUrl] = useState('');
@@ -11,8 +12,11 @@ function App() {
 
           <div className="home-page">
             <h1>Welcome to the Image Upload App</h1>
+
             {/* Pass the setImageUrl function as a prop */}
             <UploadImage setImageUrl={setImageUrl} />
+            {/* Allow users to submit a custom URL */}
+            <UploadURL setImageUrl={setImageUrl} />
             {/* Conditionally render UserPrompt if imageUrl is available */}
             {imageUrl && <UserPrompt imageUrl={imageUrl} />}
           </div>
