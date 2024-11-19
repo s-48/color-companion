@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function UploadURL({ setImageUrl }) {
+function UploadURL({ setImageUrl, setChatStage }) {
   const [url, setUrl] = useState('');
 
   const handleSubmit = (e) => {
@@ -10,6 +10,7 @@ function UploadURL({ setImageUrl }) {
       return;
     }
     setImageUrl(url); // Update the imageUrl in the parent component
+    setChatStage(1);
     setUrl(''); // Clear the input field
   };
 
