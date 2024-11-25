@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import UploadImage from './components/UploadImage';
 import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
+import Settings from './components/Settings';
 
 function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [chatLog, setChatLog] = useState([]); // Store all chat messages
   const [chatStage, setChatStage] = useState(0); // Track current stage
   const chatEndRef = useRef(null); // Reference for auto-scrolling
+  var [personality, setPersonality] = useState('helpful assistant');
 
   //Resets chat stage on new image upload
   const resetWorkflow = () => {
@@ -31,6 +33,7 @@ function App() {
       <header className="App-header">
         <h1>Color Companion</h1>
       </header>
+      <Settings personality={personality} setPersonality={setPersonality} />
       <div className="chat-window">
         {/* Chat Log */}
         <div className="chat-log">
@@ -88,6 +91,7 @@ function App() {
                 logQuestion={(question) => {
                   addChatEntry('question', question);
                 }}
+                personality={personality}
               />
             </div>
           )}
