@@ -1,72 +1,92 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import UploadImage from './components/UploadImage';
 import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
 
 function App() {
-  const [imageUrl, setImageUrl] = useState(''); // Store a single image URL
+  const [imageUrl, setImageUrl] = useState('');
+  const [chatLog, setChatLog] = useState([]); // Store all chat messages
   const [chatStage, setChatStage] = useState(0); // Track current stage
-  const [response, setResponse] = useState(''); // Store AI responses
+  const chatEndRef = useRef(null); // Reference for auto-scrolling
 
   const resetWorkflow = () => {
     setImageUrl('');
-    setResponse('');
-    setChatStage(0); // Reset to the initial stage
+    setChatLog([]);
+    setChatStage(0);
   };
+
+  const addChatEntry = (type, content) => {
+    setChatLog((prev) => [...prev, { type, content }]);
+  };
+
+  useEffect(() => {
+    // Scroll to the latest message
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [chatLog]);
 
   return (
     <div className="App">
       <header className="App-header">
         <h1>Color Companion</h1>
       </header>
-      <div className="home-page">
-        {/* Stage 0: Greeting */}
-        <div className={`chat-box ${chatStage >= 0 ? 'visible' : 'hidden'}`}>
-          <p>
-            Hi! I'm your color companion. Upload an image, and I can answer
-            your questions about the colors in it!
-          </p>
+      <div className="chat-window">
+        {/* Chat Log */}
+        <div className="chat-log">
+          {chatLog.map((entry, index) => (
+            <div key={index} className={`chat-entry ${entry.type}`}>
+              {entry.type === 'text' && <p>{entry.content}</p>}
+              {entry.type === 'image' && (
+                <img src={entry.content} alt="Uploaded preview" style={{ maxWidth: '200px', margin: '5px' }} />
+              )}
+              {entry.type === 'question' && <p><strong>Q:</strong> {entry.content}</p>}
+              {entry.type === 'answer' && <p><strong>A:</strong> {entry.content}</p>}
+            </div>
+          ))}
+          <div ref={chatEndRef} />
+        </div>
+
+        {/* Stage-specific Inputs */}
+        <div className="chat-input">
           {chatStage === 0 && (
-            <>
-              <UploadImage setImageUrl={setImageUrl} setChatStage={setChatStage} />
-              <UploadURL setImageUrl={setImageUrl} setChatStage={setChatStage} />
-            </>
+            <div>
+              <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
+              <UploadImage
+                setImageUrl={(url) => {
+                  setImageUrl(url);
+                  addChatEntry('image', url);
+                  setChatStage(1);
+                }}
+              />
+              <UploadURL
+                setImageUrl={(url) => {
+                  setImageUrl(url);
+                  addChatEntry('image', url);
+                  setChatStage(1);
+                }}
+              />
+            </div>
           )}
-        </div>
 
-        {/* Stage 1: Image Preview and Question Prompt */}
-        <div className={`chat-box ${chatStage >= 1 ? 'visible' : 'hidden'}`}>
-          {imageUrl && (
-            <>
-              <p>Thanks for the image! What would you like to know about it?</p>
-              <div className="image-preview">
-                <img
-                  src={imageUrl}
-                  alt="Uploaded preview"
-                  style={{ maxWidth: '200px', margin: '5px' }}
-                />
-              </div>
-            </>
+          {chatStage === 1 && imageUrl && (
+            <div>
+              <p>What would you like to know about the image?</p>
+              <UserPrompt
+                imageUrl={imageUrl}
+                setChatStage={() => setChatStage(2)}
+                setResponse={(response) => {
+                  // addChatEntry('question', 'What would you like to know about the image?');
+                  addChatEntry('answer', response);
+                  setChatStage(2);
+                }}
+                logQuestion={(question) => {
+                  addChatEntry('question', question); // Log user's question in chat log
+                }}
+              />
+            </div>
           )}
-          {chatStage === 1 && (
-            <UserPrompt
-              imageUrl={imageUrl}
-              setChatStage={setChatStage}
-              setResponse={setResponse}
-            />
-          )}
-        </div>
 
-        {/* Stage 2: Display Response */}
-        <div className={`chat-box ${chatStage >= 2 ? 'visible' : 'hidden'}`}>
-          {response && (
-            <>
-              <h3>AI Response:</h3>
-              <p>{response}</p>
-            </>
-          )}
           {chatStage === 2 && (
-            <div className="follow-up-options">
+            <div>
               <button onClick={() => setChatStage(1)}>Ask another question</button>
               <button onClick={resetWorkflow}>Upload a new image</button>
             </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function UserPrompt({ imageUrl, setChatStage, setResponse }) {
+function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
   const [question, setQuestion] = useState('');
   const [personality, setPersonality] = useState('helpful assistant');
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ function UserPrompt({ imageUrl, setChatStage, setResponse }) {
     try {
       const systemMessage = `You are a ${personality}.`;
       const userMessage = question;
-
+      logQuestion(question);
       const res = await fetch('http://localhost:5001/generate-text', {
         method: 'POST',
         headers: {
