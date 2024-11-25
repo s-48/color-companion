@@ -9,18 +9,20 @@ function App() {
   const [chatStage, setChatStage] = useState(0); // Track current stage
   const chatEndRef = useRef(null); // Reference for auto-scrolling
 
+  //Resets chat stage on new image upload
   const resetWorkflow = () => {
     setImageUrl('');
     setChatLog([]);
     setChatStage(0);
   };
 
+  //Adds a chat to chat log
   const addChatEntry = (type, content) => {
     setChatLog((prev) => [...prev, { type, content }]);
   };
 
+  //Scroll to most recent chat
   useEffect(() => {
-    // Scroll to the latest message
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatLog]);
 
@@ -45,7 +47,7 @@ function App() {
           <div ref={chatEndRef} />
         </div>
 
-        {/* Stage-specific Inputs */}
+        {/* Stage 0: no image upload yet */}
         <div className="chat-input">
           {chatStage === 0 && (
             <div>
@@ -66,7 +68,7 @@ function App() {
               />
             </div>
           )}
-
+          {/* Stage 1: image upload- sending prompt to openAI */}
           {chatStage === 1 && imageUrl && (
             <div>
               <p>What would you like to know about the image?</p>
@@ -74,17 +76,16 @@ function App() {
                 imageUrl={imageUrl}
                 setChatStage={() => setChatStage(2)}
                 setResponse={(response) => {
-                  // addChatEntry('question', 'What would you like to know about the image?');
                   addChatEntry('answer', response);
                   setChatStage(2);
                 }}
                 logQuestion={(question) => {
-                  addChatEntry('question', question); // Log user's question in chat log
+                  addChatEntry('question', question);
                 }}
               />
             </div>
           )}
-
+          {/* Stage 2: Prompt submitted and response returned- option to keep asking or new upload */}
           {chatStage === 2 && (
             <div>
               <button onClick={() => setChatStage(1)}>Ask another question</button>
