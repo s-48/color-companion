@@ -9,7 +9,7 @@ function App() {
   const [chatLog, setChatLog] = useState([]); // Store all chat messages
   const [chatStage, setChatStage] = useState(0); // Track current stage
   const chatEndRef = useRef(null); // Reference for auto-scrolling
-  var [personality, setPersonality] = useState('helpful assistant');
+  var [personality, setPersonality] = useState('Expert colorblind assistant');
 
   //Resets chat stage on new image upload
   const resetWorkflow = () => {

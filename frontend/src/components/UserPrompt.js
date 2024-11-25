@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personality }) {
   const [question, setQuestion] = useState('');
-  // const [personality, setPersonality] = useState('helpful assistant');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -61,16 +60,6 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personal
             placeholder="Enter your question here"
           />
         </div>
-        {/* <div>
-          <label htmlFor="personality">AI Personality:</label>
-          <input
-            type="text"
-            id="personality"
-            value={personality}
-            onChange={(e) => setPersonality(e.target.value)}
-            placeholder="e.g., friendly, informative"
-          />
-        </div>  */}
         <button type="submit" disabled={isLoading}>Submit</button>
       </form>
       {error && <p className="error">{error}</p>}

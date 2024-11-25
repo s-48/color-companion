@@ -10,9 +10,9 @@ function Settings({ personality, setPersonality }) {
         onChange={(e) => setPersonality(e.target.value)}
       >
         <option value="expert colorblind assistant">Expert Colorblind Assistant</option>
-        <option value="best friend">Best Friend</option>
+        <option value="gen Z best friend">Gen Z Best Friend</option>
         <option value="critical mom">Critical Mom</option>
-        <option value="person who talks in gen z slang">person who talks in gen z slang</option>
+        <option value="excentric artist">Excentric Artist</option>
       </select>
     </div>
   );
