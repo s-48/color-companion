@@ -16,7 +16,7 @@ function UploadURL({ setImageUrl, setChatStage }) {
 
   return React.createElement(
     'form',
-    { onSubmit: handleSubmit, className: 'upload-url-form' },
+    { onSubmit: handleSubmit, className: 'upload-container' },
     React.createElement('input', {
       type: 'text',
       placeholder: 'Enter image URL',

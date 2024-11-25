@@ -61,7 +61,7 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
             placeholder="Enter your question here"
           />
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="personality">AI Personality:</label>
           <input
             type="text"
@@ -70,7 +70,7 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
             onChange={(e) => setPersonality(e.target.value)}
             placeholder="e.g., friendly, informative"
           />
-        </div>
+        </div> */}
         <button type="submit" disabled={isLoading}>Submit</button>
       </form>
       {error && <p className="error">{error}</p>}

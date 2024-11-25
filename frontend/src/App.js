@@ -50,27 +50,33 @@ function App() {
         {/* Stage 0: no image upload yet */}
         <div className="chat-input">
           {chatStage === 0 && (
-            <div>
-              <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
-              <UploadImage
-                setImageUrl={(url) => {
-                  setImageUrl(url);
-                  addChatEntry('image', url);
-                  setChatStage(1);
-                }}
-              />
-              <UploadURL
-                setImageUrl={(url) => {
-                  setImageUrl(url);
-                  addChatEntry('image', url);
-                  setChatStage(1);
-                }}
-              />
+            <div className="">
+              <div className="color-welcome">
+                <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
+              </div>
+              <div className="upload">
+                <UploadImage
+                  setImageUrl={(url) => {
+                    setImageUrl(url);
+                    addChatEntry('image', url);
+                    setChatStage(1);
+                  }}
+                />
+              </div>
+              <div className="url">
+                <UploadURL
+                  setImageUrl={(url) => {
+                    setImageUrl(url);
+                    addChatEntry('image', url);
+                    setChatStage(1);
+                  }}
+                />
+              </div>
             </div>
           )}
           {/* Stage 1: image upload- sending prompt to openAI */}
           {chatStage === 1 && imageUrl && (
-            <div>
+            <div className="user-prompt">
               <p>What would you like to know about the image?</p>
               <UserPrompt
                 imageUrl={imageUrl}
@@ -87,7 +93,7 @@ function App() {
           )}
           {/* Stage 2: Prompt submitted and response returned- option to keep asking or new upload */}
           {chatStage === 2 && (
-            <div>
+            <div className="user-options">
               <button onClick={() => setChatStage(1)}>Ask another question</button>
               <button onClick={resetWorkflow}>Upload a new image</button>
             </div>
