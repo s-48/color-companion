@@ -9,7 +9,9 @@ function App() {
   const [chatLog, setChatLog] = useState([]); // Store all chat messages
   const [chatStage, setChatStage] = useState(0); // Track current stage
   const chatEndRef = useRef(null); // Reference for auto-scrolling
-  var [personality, setPersonality] = useState('Expert colorblind assistant');
+  var [personality, setPersonality] = useState('Expert colorblind assistant'); //track settings
+  var [colorblindness, setColorblindness] = useState('none'); //track settings
+  const [showSettings, setShowSettings] = useState(false); //toggle setting panel visibility
 
   //Resets chat stage on new image upload
   const resetWorkflow = () => {
@@ -32,8 +34,25 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Color Companion</h1>
+        {/* Toggle Settings Button */}
+        <button
+          className="toggle-settings"
+          onClick={() => setShowSettings((prev) => !prev)}
+        >
+          {showSettings ? 'Hide Settings' : 'Settings'}
+        </button>
       </header>
-      <Settings personality={personality} setPersonality={setPersonality} />
+
+      {/* Conditionally Render Settings */}
+      {showSettings && (
+        <Settings
+          personality={personality}
+          setPersonality={setPersonality}
+          colorblindness={colorblindness}
+          setColorblindness={setColorblindness}
+        />
+      )}
+
       <div className="chat-window">
         {/* Chat Log */}
         <div className="chat-log">
@@ -92,6 +111,7 @@ function App() {
                   addChatEntry('question', question);
                 }}
                 personality={personality}
+                colorblindness={colorblindness}
               />
             </div>
           )}

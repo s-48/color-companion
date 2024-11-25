@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personality }) {
+function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personality, colorblindness }) {
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -17,7 +17,7 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personal
     setError('');
 
     try {
-      const systemMessage = `You are a ${personality}.`;
+      const systemMessage = `You are a ${personality} tailored for ${colorblindness} colorblindness.`;
       const userMessage = question;
       logQuestion(question);
       const res = await fetch('http://localhost:5001/generate-text', {
