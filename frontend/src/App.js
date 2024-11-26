@@ -20,7 +20,6 @@ function App() {
   const resetWorkflow = () => {
     setImageUrl(''); // Clear the current image
     setChatStage(0); // Reset to the initial upload stage
-    // Do not clear chatLog to preserve existing messages
   };
 
   // Add a new entry to the chat log
@@ -37,14 +36,16 @@ function App() {
     <div className="App-wrapper">
       <div className="App">
         {/* Conditionally Render Settings */}
-        {showSettings && (
-          <Settings
-            personality={personality}
-            setPersonality={setPersonality}
-            colorblindness={colorblindness}
-            setColorblindness={setColorblindness}
-          />
-        )}
+        <div className={`settings-sidebar ${showSettings ? 'open' : ''}`}>
+          {showSettings && (
+            <Settings
+              personality={personality}
+              setPersonality={setPersonality}
+              colorblindness={colorblindness}
+              setColorblindness={setColorblindness}
+            />
+          )}
+        </div>
         {/* Live Feed Sidebar */}
         <div className={`feed-sidebar ${showLiveFeed ? 'open' : ''}`}>
           <button className="close-btn" onClick={() => setShowLiveFeed(false)}>Close</button>
