@@ -13,11 +13,10 @@ function App() {
   var [colorblindness, setColorblindness] = useState('none'); //track settings
   const [showSettings, setShowSettings] = useState(false); //toggle setting panel visibility
 
-  //Resets chat stage on new image upload
   const resetWorkflow = () => {
-    setImageUrl('');
-    setChatLog([]);
-    setChatStage(0);
+    setImageUrl(''); // Clear the current image
+    setChatStage(0); // Reset to the initial upload stage
+    // Do not clear chatLog to preserve existing messages
   };
 
   //Adds a chat to chat log
@@ -34,7 +33,9 @@ function App() {
     <div className="App-wrapper">
       <div className="App">
         <header className="App-header">
-          <h1>Color Companion</h1>
+          <div className="color-welcome">
+            <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
+          </div>
           {/* Toggle Settings Button */}
           <button
             className="toggle-settings"
@@ -74,9 +75,6 @@ function App() {
           <div className="chat-input">
             {chatStage === 0 && (
               <div className="">
-                <div className="color-welcome">
-                  <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
-                </div>
                 <div className="upload">
                   <UploadImage
                     setImageUrl={(url) => {

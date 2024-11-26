@@ -1,40 +1,75 @@
-body { 
+/* General body styling */
+body {
     margin: 0;
-    padding:0;
-}
-
-.App-wrapper { 
-    min-height: 100vh;
-    height: auto;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling on the body */
+  }
+  
+  /* Wrapper to center the app */
+  .App-wrapper {
+    height: 100vh; /* Full viewport height */
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
     background-color: #8E8E93;
-}
-
-.App { 
-    height: auto;
+  }
+  
+  /* Main app container */
+  .App {
+    height: 95vh; /* Fixed height */
     width: 98%;
     border-radius: 10px;
     background-color: #F2F2F7;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    padding-bottom: 200px;
-}
-
-.chat-log {
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+    overflow: hidden; /* Prevent external content overflow */
+  }
+  
+  /* Header styling */
+  .App-header {
+    flex-shrink: 0; /* Prevent header from shrinking */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .color-welcome {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+  
+  /* Chat window for main content */
+  .chat-window {
+    flex: 1; /* Allow chat window to grow and fill remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent external overflow */
+    margin-top: 10px;
+  }
+  
+  /* Chat log container for scrollable content */
+  .chat-log {
+    flex: 1; /* Fill available vertical space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding-left: 80px;
-    padding-right: 80px;
+    background-color: #E5E5EA;
+    border-radius: 5px;
   }
-
   
+  /* Individual chat entries */
   .chat-entry {
     max-width: 60%;
     padding: 10px;
     margin-bottom: 5px;
+    word-wrap: break-word;
   }
   
   .chat-entry.question {
@@ -45,7 +80,6 @@ body {
     border-top-left-radius: 20px; 
     border-top-right-radius: 20px; 
     border-bottom-left-radius: 20px; 
-
   }
   
   .chat-entry.answer {
@@ -56,4 +90,41 @@ body {
     border-top-right-radius: 20px; 
     border-top-left-radius: 20px; 
     border-bottom-right-radius: 20px; 
+  }
+  
+  /* Chat input section */
+  .chat-input {
+    flex-shrink: 0; /* Prevent shrinking */
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #FFFFFF;
+  }
+  
+  /* Upload and prompt styling */
+  .upload, .url {
+    margin: 10px 0;
+  }
+  
+  .user-prompt p {
+    margin-bottom: 10px;
+  }
+  
+  .user-options {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
   }
