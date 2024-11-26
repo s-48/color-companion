@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
+function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion, personality, colorblindness }) {
   const [question, setQuestion] = useState('');
-  const [personality, setPersonality] = useState('helpful assistant');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -18,7 +17,7 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
     setError('');
 
     try {
-      const systemMessage = `You are a ${personality}.`;
+      const systemMessage = `You are a ${personality} tailored for ${colorblindness} colorblindness.`;
       const userMessage = question;
       logQuestion(question);
       const res = await fetch('http://localhost:5001/generate-text', {
@@ -61,16 +60,6 @@ function UserPrompt({ imageUrl, setChatStage, setResponse, logQuestion }) {
             placeholder="Enter your question here"
           />
         </div>
-        <div>
-          <label htmlFor="personality">AI Personality:</label>
-          <input
-            type="text"
-            id="personality"
-            value={personality}
-            onChange={(e) => setPersonality(e.target.value)}
-            placeholder="e.g., friendly, informative"
-          />
-        </div> 
         <button type="submit" disabled={isLoading}>Submit</button>
       </form>
       {error && <p className="error">{error}</p>}

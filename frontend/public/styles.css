@@ -1,0 +1,23 @@
+body { 
+    margin: 0;
+    padding:0;
+}
+
+.App-wrapper { 
+    min-height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #8E8E93;
+}
+
+.App { 
+    min-height: 95vh;
+    height: auto;
+    width: 98%;
+    border-radius: 10px;
+    background-color: #F2F2F7;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);;
+}
