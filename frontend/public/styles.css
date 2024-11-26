@@ -14,10 +14,46 @@ body {
 }
 
 .App { 
-    min-height: 95vh;
     height: auto;
     width: 98%;
     border-radius: 10px;
     background-color: #F2F2F7;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    padding-bottom: 200px;
 }
+
+.chat-log {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  
+  .chat-entry {
+    max-width: 60%;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  
+  .chat-entry.question {
+    align-self: flex-end;
+    background-color: #FFFFFF; 
+    text-align: right;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+    border-bottom-left-radius: 20px; 
+
+  }
+  
+  .chat-entry.answer {
+    align-self: flex-start;
+    background-color: #FFFFFF;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border-top-right-radius: 20px; 
+    border-top-left-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+  }
