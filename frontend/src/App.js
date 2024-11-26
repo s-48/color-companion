@@ -3,13 +3,10 @@ import UploadImage from './components/UploadImage';
 import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
 import Settings from './components/Settings';
-
 import LiveFeed from './components/LiveFeed';
 
 function App() {
   const [imageUrl, setImageUrl] = useState('');
-  const [activeTab, setActiveTab] = useState('upload');
-
   const [chatLog, setChatLog] = useState([
     { type: 'welcome', content: "Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!" }
   ]); // Include the welcome message in the chat log
@@ -18,6 +15,7 @@ function App() {
   const [personality, setPersonality] = useState('Expert colorblind assistant'); // Track settings
   const [colorblindness, setColorblindness] = useState('none'); // Track settings
   const [showSettings, setShowSettings] = useState(false); // Toggle settings panel visibility
+  const [showLiveFeed, setShowLiveFeed] = useState(false); // Toggle settings panel visibility
 
   const resetWorkflow = () => {
     setImageUrl(''); // Clear the current image
@@ -47,6 +45,7 @@ function App() {
             setColorblindness={setColorblindness}
           />
         )}
+        {showLiveFeed && <LiveFeed />}
 
         <div className="chat-window">
           {/* Chat Log */}
@@ -129,15 +128,17 @@ function App() {
                 <button onClick={resetWorkflow}>Upload a new image</button>
               </div>
             )}
+              <div className="user-options">
                 <button onClick={() => setShowSettings((prev) => !prev)}>
                   {showSettings ? 'Close Settings' : 'Settings'}
                 </button>
-                <button onClick={() => setActiveTab('upload')}>Image Upload</button>
-                <button onClick={() => setActiveTab('live-feed')}>Live Feed</button>
+                <button onClick={() => setShowLiveFeed((prev) => !prev)}>
+                  {showLiveFeed ? 'Close Live Feed' : 'Open Live Feed'}
+                </button>
+              </div>
           </div>
         </div>
       </div>
-        {activeTab === 'live-feed' && <LiveFeed />}
     </div>
   );
 }

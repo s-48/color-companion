@@ -10,7 +10,6 @@ function UploadURL({ setImageUrl, setChatStage }) {
       return;
     }
     setImageUrl(url); // Update the imageUrl in the parent component
-    // setChatStage(1);
     setUrl(''); // Clear the input field
   };
 

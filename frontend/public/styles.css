@@ -109,6 +109,7 @@ body {
   
   .user-options {
     display: flex;
+    flex-direction: row;
     gap: 10px;
     justify-content: center;
     margin-top: 10px;
@@ -142,4 +143,9 @@ body {
     max-width: 100%; /* Ensure the image fits within the container */
     max-height: 300px; /* Optional: Prevent overly large images */
     border-radius: 10px; /* Add rounded corners to the image */
+}
+
+.live-feed { 
+  height: 300px; 
+  width: 300px;
 }
