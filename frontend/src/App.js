@@ -4,8 +4,12 @@ import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
 import Settings from './components/Settings';
 
+import LiveFeed from './components/LiveFeed';
+
 function App() {
   const [imageUrl, setImageUrl] = useState('');
+  const [activeTab, setActiveTab] = useState('upload');
+
   const [chatLog, setChatLog] = useState([
     { type: 'welcome', content: "Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!" }
   ]); // Include the welcome message in the chat log
@@ -131,6 +135,11 @@ function App() {
           </div>
         </div>
       </div>
+      <div className="tabs">
+        <button onClick={() => setActiveTab('upload')}>Image Upload</button>
+        <button onClick={() => setActiveTab('live-feed')}>Live Feed</button>
+      </div>
+        {activeTab === 'live-feed' && <LiveFeed />}
     </div>
   );
 }
