@@ -27,20 +27,19 @@ body {
     overflow: hidden; /* Prevent external content overflow */
   }
   
-  /* Header styling */
-  .App-header {
-    flex-shrink: 0; /* Prevent header from shrinking */
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    background-color: #FFFFFF;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .color-welcome {
-    font-size: 1.2rem;
-    text-align: left;
+  /* Welcome message */
+.chat-entry.welcome {
+    align-self: left; /* Center the welcome message */
+    background-color: #FFFFFF; /* Background color */
+    padding: 8px;
+    text-align: center;
+    border-top-right-radius: 20px; 
+    border-top-left-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    max-width: 60%; 
+    font-size: 1rem;
+    color: #333333;
   }
   
   /* Chat window for main content */
@@ -49,7 +48,6 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Prevent external overflow */
-    margin-top: 10px;
   }
   
   /* Chat log container for scrollable content */
@@ -128,3 +126,20 @@ body {
   button:hover {
     background-color: #0056b3;
   }
+
+  /* Center the image preview */
+.chat-entry.image {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center (if needed for height) */
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 60%; /* Adjust width to match other chat entries */
+    margin: 10px auto; /* Center the chat entry itself */
+  }
+  
+.chat-entry.image img {
+    max-width: 100%; /* Ensure the image fits within the container */
+    max-height: 300px; /* Optional: Prevent overly large images */
+    border-radius: 10px; /* Add rounded corners to the image */
+}

@@ -6,12 +6,14 @@ import Settings from './components/Settings';
 
 function App() {
   const [imageUrl, setImageUrl] = useState('');
-  const [chatLog, setChatLog] = useState([]); // Store all chat messages
+  const [chatLog, setChatLog] = useState([
+    { type: 'welcome', content: "Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!" }
+  ]); // Include the welcome message in the chat log
   const [chatStage, setChatStage] = useState(0); // Track current stage
   const chatEndRef = useRef(null); // Reference for auto-scrolling
-  var [personality, setPersonality] = useState('Expert colorblind assistant'); //track settings
-  var [colorblindness, setColorblindness] = useState('none'); //track settings
-  const [showSettings, setShowSettings] = useState(false); //toggle setting panel visibility
+  const [personality, setPersonality] = useState('Expert colorblind assistant'); // Track settings
+  const [colorblindness, setColorblindness] = useState('none'); // Track settings
+  const [showSettings, setShowSettings] = useState(false); // Toggle settings panel visibility
 
   const resetWorkflow = () => {
     setImageUrl(''); // Clear the current image
@@ -19,12 +21,12 @@ function App() {
     // Do not clear chatLog to preserve existing messages
   };
 
-  //Adds a chat to chat log
+  // Add a new entry to the chat log
   const addChatEntry = (type, content) => {
     setChatLog((prev) => [...prev, { type, content }]);
   };
 
-  //Scroll to most recent chat
+  // Scroll to the most recent chat entry
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [chatLog]);
@@ -32,19 +34,6 @@ function App() {
   return (
     <div className="App-wrapper">
       <div className="App">
-        <header className="App-header">
-          <div className="color-welcome">
-            <p>Hi! I'm your color companion. Upload an image, and I can answer your questions about the colors in it!</p>
-          </div>
-          {/* Toggle Settings Button */}
-          <button
-            className="toggle-settings"
-            onClick={() => setShowSettings((prev) => !prev)}
-          >
-            {showSettings ? 'Hide Settings' : 'Settings'}
-          </button>
-        </header>
-
         {/* Conditionally Render Settings */}
         {showSettings && (
           <Settings
@@ -62,16 +51,31 @@ function App() {
               <div key={index} className={`chat-entry ${entry.type}`}>
                 {entry.type === 'text' && <p>{entry.content}</p>}
                 {entry.type === 'image' && (
-                  <img src={entry.content} alt="Uploaded preview" style={{ maxWidth: '200px', margin: '5px' }} />
+                  <div className="chat-entry image">
+                    <img
+                      src={entry.content}
+                      alt="Uploaded preview"
+                      style={{ maxWidth: '200px', margin: '5px' }}
+                    />
+                  </div>
                 )}
-                {entry.type === 'question' && <p><strong>Q:</strong> {entry.content}</p>}
-                {entry.type === 'answer' && <p><strong>A:</strong> {entry.content}</p>}
+                {entry.type === 'question' && (
+                  <p>
+                    <strong>Q:</strong> {entry.content}
+                  </p>
+                )}
+                {entry.type === 'answer' && (
+                  <p>
+                    <strong>A:</strong> {entry.content}
+                  </p>
+                )}
+                {entry.type === 'welcome' && <p>{entry.content}</p>}
               </div>
             ))}
             <div ref={chatEndRef} />
           </div>
 
-          {/* Stage 0: no image upload yet */}
+          {/* Stage 0: no image uploaded yet */}
           <div className="chat-input">
             {chatStage === 0 && (
               <div className="">
@@ -95,7 +99,7 @@ function App() {
                 </div>
               </div>
             )}
-            {/* Stage 1: image upload- sending prompt to openAI */}
+            {/* Stage 1: image uploaded */}
             {chatStage === 1 && imageUrl && (
               <div className="user-prompt">
                 <p>What would you like to know about the image?</p>
@@ -114,13 +118,16 @@ function App() {
                 />
               </div>
             )}
-            {/* Stage 2: Prompt submitted and response returned- option to keep asking or new upload */}
+            {/* Stage 2: Response returned */}
             {chatStage === 2 && (
               <div className="user-options">
                 <button onClick={() => setChatStage(1)}>Ask another question</button>
                 <button onClick={resetWorkflow}>Upload a new image</button>
               </div>
             )}
+                <button onClick={() => setShowSettings((prev) => !prev)}>
+                  {showSettings ? 'Close Settings' : 'Settings'}
+                </button>
           </div>
         </div>
       </div>
