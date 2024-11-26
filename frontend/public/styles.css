@@ -145,7 +145,19 @@ body {
     border-radius: 10px; /* Add rounded corners to the image */
 }
 
-.live-feed { 
-  height: 300px; 
-  width: 300px;
+.feed-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Start off-screen */
+  width: 600px;
+  height: 100%;
+  background: #f5f5f5;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.feed-sidebar.open {
+  right: 0; /* Slide into view */
 }

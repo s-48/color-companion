@@ -45,7 +45,11 @@ function App() {
             setColorblindness={setColorblindness}
           />
         )}
-        {showLiveFeed && <LiveFeed />}
+        {/* Live Feed Sidebar */}
+        <div className={`feed-sidebar ${showLiveFeed ? 'open' : ''}`}>
+          <button className="close-btn" onClick={() => setShowLiveFeed(false)}>Close</button>
+          <LiveFeed />
+        </div>
 
         <div className="chat-window">
           {/* Chat Log */}

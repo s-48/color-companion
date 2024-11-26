@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-const LiveFeed = () => {
+const LiveFeed = ({closeSidebar}) => {
   const videoRef = useRef(null); // Ref for the video element
   const canvasRef = useRef(null); // Ref for the canvas (for pixel analysis)
   const [stream, setStream] = useState(null); // State to store the media stream
