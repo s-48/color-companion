@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 
-const LiveFeed = ({closeSidebar}) => {
+const LiveFeed = () => {
   const videoRef = useRef(null); // Ref for the video element
   const canvasRef = useRef(null); // Ref for the canvas (for pixel analysis)
   const [stream, setStream] = useState(null); // State to store the media stream
@@ -43,22 +43,26 @@ const LiveFeed = ({closeSidebar}) => {
     }
   };
 
-  // Function to get RGB value of a clicked pixel
   const handleClick = (event) => {
+    const video = videoRef.current;
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-    const video = videoRef.current;
-
+  
+    // Dynamically set the canvas size to match the video
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+  
     // Draw the current video frame on the canvas
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-    // Calculate the pixel coordinates
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
+  
+    // Calculate the click position relative to the video
+    const rect = video.getBoundingClientRect(); // Get video position and size
+    const x = ((event.clientX - rect.left) / rect.width) * canvas.width;
+    const y = ((event.clientY - rect.top) / rect.height) * canvas.height;
+  
     // Get the RGB value of the pixel at the clicked position
     const pixelData = context.getImageData(x, y, 1, 1).data;
+  
     setRgbValue(`RGB(${pixelData[0]}, ${pixelData[1]}, ${pixelData[2]})`);
   };
 

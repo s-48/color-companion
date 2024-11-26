@@ -149,7 +149,7 @@ body {
   position: fixed;
   top: 0;
   right: -100%; /* Start off-screen */
-  width: 600px;
+  width: 640px;
   height: 100%;
   background: #f5f5f5;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
@@ -160,4 +160,17 @@ body {
 
 .feed-sidebar.open {
   right: 0; /* Slide into view */
+}
+
+video {
+  width: 640px;
+  height: 480px;
+  object-fit: cover;
+  display: block;
+}
+
+canvas {
+  width: 640px;
+  height: 480px;
+  display: none; /* Keep it hidden but aligned with the video */
 }
