@@ -132,12 +132,10 @@ function App() {
                 <button onClick={() => setShowSettings((prev) => !prev)}>
                   {showSettings ? 'Close Settings' : 'Settings'}
                 </button>
+                <button onClick={() => setActiveTab('upload')}>Image Upload</button>
+                <button onClick={() => setActiveTab('live-feed')}>Live Feed</button>
           </div>
         </div>
-      </div>
-      <div className="tabs">
-        <button onClick={() => setActiveTab('upload')}>Image Upload</button>
-        <button onClick={() => setActiveTab('live-feed')}>Live Feed</button>
       </div>
         {activeTab === 'live-feed' && <LiveFeed />}
     </div>
