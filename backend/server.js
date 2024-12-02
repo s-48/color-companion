@@ -110,5 +110,36 @@ app.post('/generate-text', async (req, res) => {
 
 });
 
+app.post('/get-color', async (req, res) => {
+  try {
+    const { rgbValue } = req.body;
+
+    if (!rgbValue) {
+      return res.status(400).json({ error: "RGB value is required" });
+    }
+
+    // Construct the prompt
+    const prompt = `What color does this RGB value represent? ${rgbValue} Respond ONLY with the name of the color`;
+
+    // Call OpenAI API
+    const openaiResponse2 = await openai.chat.completions.create({
+      model: 'gpt-4', // Specify the model
+      messages: [
+        { role: 'system', content: "You are an expert in color identification." },
+        { role: 'user', content: prompt}
+      ],
+      max_tokens: 100, 
+    });
+
+    // Send the response from OpenAI back to the client
+    res.json({ response: openaiResponse2.choices[0].message.content });
+
+  } catch (error) {
+    console.error("Error generating response:", error);
+    res.status(500).json({ error: "Error generating response" });
+  }
+});
+
+
 // Start the server
 app.listen(PORT, () => console.log(`Backend running on http://localhost:${PORT}`));
