@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const UploadImage = ({ setImageUrl, setChatStage }) => {
+const UploadImage = ({ setImageUrl, setChatStage, addChatEntry, wrapperClass }) => {
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [uploadStatus, setUploadStatus] = useState('');
@@ -35,16 +35,18 @@ const UploadImage = ({ setImageUrl, setChatStage }) => {
   };
 
   return (
-    <div className="upload-container">
-      <input type="file" accept="image/*" onChange={handleImageChange} />
-      {previewUrl && (
-        <div>
-          <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} />
-          {/* Render the button only if an image is staged */}
-          <button onClick={handleUpload}>Upload Image</button>
-        </div>
-      )}
-      {uploadStatus && <p>{uploadStatus}</p>}
+    <div className={wrapperClass}>
+      <div className="upload-image-container">
+        <input type="file" accept="image/*" onChange={handleImageChange} className="file-input"/>
+        {previewUrl && (
+          <div>
+            <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} />
+            {/* Render the button only if an image is staged */}
+            <button onClick={handleUpload}>Upload Image</button>
+          </div>
+        )}
+        {uploadStatus && <p>{uploadStatus}</p>}
+      </div>
     </div>
   );
 };

@@ -109,7 +109,7 @@ function App() {
           {/* Stage 0: no image uploaded yet */}
           <div className="chat-input">
             {chatStage === 0 && (
-              <div className="">
+              <div className="upload-container">
                 <div className="upload">
                   <UploadImage
                     setImageUrl={(url) => {
@@ -117,6 +117,7 @@ function App() {
                       addChatEntry('image', url);
                       setChatStage(1);
                     }}
+                    wrapperClass="chat-input"
                   />
                 </div>
                 <div className="url">
@@ -126,7 +127,18 @@ function App() {
                       addChatEntry('image', url);
                       setChatStage(1);
                     }}
+                    wrapperClass="chat-input"
                   />
+                </div>
+                <div className="livefeed-container">
+                  <button onClick={() => setShowLiveFeed((prev) => !prev)}>
+                    {showLiveFeed ? 'Close Live Feed' : 'Open Live Feed'}
+                  </button>
+                </div>
+                <div className="settings-container">
+                  <button onClick={() => setShowSettings((prev) => !prev)}>
+                    {showSettings ? 'Close Settings' : 'Settings'}
+                  </button>
                 </div>
               </div>
             )}
@@ -156,14 +168,6 @@ function App() {
                 <button onClick={resetWorkflow}>Upload a new image</button>
               </div>
             )}
-              <div className="user-options">
-                <button onClick={() => setShowSettings((prev) => !prev)}>
-                  {showSettings ? 'Close Settings' : 'Settings'}
-                </button>
-                <button onClick={() => setShowLiveFeed((prev) => !prev)}>
-                  {showLiveFeed ? 'Close Live Feed' : 'Open Live Feed'}
-                </button>
-              </div>
           </div>
         </div>
       </div>

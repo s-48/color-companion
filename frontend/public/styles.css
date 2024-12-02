@@ -91,40 +91,27 @@ body {
     border-top-left-radius: 20px; 
     border-bottom-right-radius: 20px; 
   }
-
-  
-  /* Chat input section */
-  .chat-input {
-    flex-shrink: 0; /* Prevent shrinking */
-    padding: 10px;
-    border-top: 1px solid #ccc;
-    background-color: #FFFFFF;
-  }
   
   /* Upload and prompt styling */
   .upload, .url {
     margin: 10px 0;
   }
+
   
   .user-prompt p {
     margin-bottom: 10px;
   }
-  
-  .user-options {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 10px;
-  }
+
   
   button {
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    background-color: #007BFF;
+    background-color: black;
     color: white;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight:bold;
   }
   
   button:hover {
@@ -146,6 +133,11 @@ body {
     max-width: 100%; /* Ensure the image fits within the container */
     max-height: 300px; /* Optional: Prevent overly large images */
     border-radius: 10px; /* Add rounded corners to the image */
+}
+
+.icon-container img{ 
+  width: 75px; 
+  height: 75px;
 }
 
 .feed-sidebar {
@@ -265,3 +257,45 @@ canvas {
 .text-container {
   flex-grow: 1; /* Allow text to take up the remaining space */
 }
+
+
+
+/* Chat input section */
+.chat-input {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-shrink: 0; /* Prevent shrinking */
+  padding: 10px; 
+  background-color: #FFFFFF;
+}
+
+.user-options {
+  display: flex;
+  flex-direction: row;
+  /* gap: 40px; */
+  justify-content: center;
+  margin-top: 10px;
+  height: 40px;
+  border: solid;
+}
+
+.upload-container { 
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+}
+
+
+.upload-url-container,  .upload-image-container, .livefeed-container, .settings-container{ 
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 40px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
