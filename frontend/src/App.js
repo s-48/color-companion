@@ -68,20 +68,43 @@ function App() {
                   </div>
                 )}
                 {entry.type === 'question' && (
+                <div className="chat-row">
+                  <div className="chat-container">
                   <p>
                     <strong>Q:</strong> {entry.content}
                   </p>
+                  </div>
+                  <div className="icon-container">
+                    <img src="Images/User.png"/>
+                  </div>
+                </div>
                 )}
                 {entry.type === 'answer' && (
-                  <p>
-                    <strong>A:</strong> {entry.content}
-                  </p>
+                  <div className="chat-row">
+                    <div className="icon-container">
+                      <img src="Images/Companion.png"/>
+                    </div>
+                    <div className="chat-container">
+                      <p>
+                        <strong>A:</strong> {entry.content}
+                      </p>
+                    </div>
+                  </div>
                 )}
-                {entry.type === 'welcome' && <p>{entry.content}</p>}
-              </div>
+                {entry.type === 'welcome' && (
+                  <div className="chat-row">
+                    <div className="icon-container">
+                      <img src="Images/Companion.png" alt="Companion Icon" />
+                    </div>
+                    <div className="chat-container">
+                      <p>{entry.content}</p>
+                    </div>
+                  </div>
+                )}
+          </div>
             ))}
             <div ref={chatEndRef} />
-          </div>
+        </div>
 
           {/* Stage 0: no image uploaded yet */}
           <div className="chat-input">

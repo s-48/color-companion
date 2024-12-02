@@ -4,6 +4,7 @@ body {
     padding: 0;
     height: 100vh; /* Full viewport height */
     overflow: hidden; /* Prevent scrolling on the body */
+    font-family: 'IBM Plex Mono', monospace;
   }
   
   /* Wrapper to center the app */
@@ -13,6 +14,7 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #8E8E93;
+    background-color: black;
   }
   
   /* Main app container */
@@ -89,6 +91,7 @@ body {
     border-top-left-radius: 20px; 
     border-bottom-right-radius: 20px; 
   }
+
   
   /* Chat input section */
   .chat-input {
@@ -170,7 +173,6 @@ body {
   height: 100%;
   background: #f5f5f5;
   box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
   transition: right 0.3s ease-in-out;
   z-index: 1000;
 }
@@ -190,4 +192,76 @@ canvas {
   width: 640px;
   height: 480px;
   display: none; /* Keep it hidden but aligned with the video */
+}
+
+.settings { 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-around;
+  height: 100%;
+  padding: 15px;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.settings div { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.settings label {
+  margin-bottom: 0.5rem;
+  font-size: 20px; 
+}
+
+.settings select { 
+  width: 90%;
+  font-family: 'IBM Plex Mono', monospace;
+}
+
+.settings select {
+  width: 100%; /* Make it responsive */
+  max-width: 300px; /* Optional: set a max width */
+  padding: 0.5rem; /* Add some padding inside */
+  font-size: 16px; /* Font size of the options */
+  color: #333; /* Text color */
+  border: 1px solid #ccc; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: #f9f9f9; /* Background color */
+  appearance: none; /* Remove default dropdown styling (varies by browser) */
+  -webkit-appearance: none; /* Safari/Chrome */
+  -moz-appearance: none; /* Firefox */
+  cursor: pointer; /* Pointer cursor for hover */
+}
+
+/* On hover */
+.settings select:hover {
+  border-color: #007BFF; /* Change border color on hover */
+}
+
+/* Style options on open */
+.settings select option {
+  padding: 0.5rem; /* Add padding to options */
+  background-color: #fff;
+  color: #333;
+}
+
+/* Chat row container */
+.chat-row {
+  display: flex; /* Align child divs horizontally */
+  align-items: center; /* Vertically align the items */
+  margin-bottom: 8px; /* Space between entries */
+}
+
+/* Icon container */
+.icon-container {
+  flex-shrink: 0; /* Prevent the icon from shrinking */
+  margin-right: 8px; /* Space for left icons */
+  margin-left: 8px; /* Space for right icons */
+}
+
+/* Text container */
+.text-container {
+  flex-grow: 1; /* Allow text to take up the remaining space */
 }
