@@ -4,6 +4,7 @@ import UploadURL from './components/UploadURL';
 import UserPrompt from './components/UserPrompt';
 import Settings from './components/Settings';
 import LiveFeed from './components/LiveFeed';
+import ImagePopup from './components/ImagePopup';
 
 function App() {
   const [imageUrl, setImageUrl] = useState('');
@@ -60,11 +61,7 @@ function App() {
                 {entry.type === 'text' && <p>{entry.content}</p>}
                 {entry.type === 'image' && (
                   <div className="chat-entry image">
-                    <img
-                      src={entry.content}
-                      alt="Uploaded preview"
-                      style={{ maxWidth: '200px', margin: '5px' }}
-                    />
+                    <ImagePopup src={entry.content} />
                   </div>
                 )}
                 {entry.type === 'question' && (
