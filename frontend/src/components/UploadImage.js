@@ -40,7 +40,7 @@ const UploadImage = ({ setImageUrl, setChatStage, addChatEntry, wrapperClass }) 
         <input type="file" accept="image/*" onChange={handleImageChange} className="file-input"/>
         {previewUrl && (
           <div>
-            <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} />
+            {/* <img src={previewUrl} alt="Preview" style={{ width: '200px', height: 'auto' }} /> */}
             {/* Render the button only if an image is staged */}
             <button onClick={handleUpload}>Upload Image</button>
           </div>
