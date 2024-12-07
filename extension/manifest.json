@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "Color Companion",
+    "version": "1.0",
+    "description": "A browser extension powered by a React app.",
+    "action": {
+      "default_title": "Open Color Companion",
+      "default_popup": "index.html"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "permissions": ["tabs"],
+    "host_permissions": ["<all_urls>"],
+    "icons": {
+      "16": "Images/icon16.png",
+      "48": "Images/icon48.png",
+      "128": "Images/icon128.png"
+    }
+  }
+  
