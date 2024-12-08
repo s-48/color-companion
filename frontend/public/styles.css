@@ -302,6 +302,7 @@ canvas {
 .upload-url-container button{ 
   margin-left: 10px;
 }
+
 #ImagePopup.js
 .chat-entry.image {
   transition: all 0.3s ease;
@@ -327,3 +328,35 @@ canvas {
 .close-btn { 
   margin: 10px;
 }
+
+.file-input {
+  display: none; /* Hide the default file input */
+}
+
+.file-upload-container {
+  display: inline-block; /* Keep the label inline for button-like behavior */
+}
+
+.file-upload-label {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight:bold;
+}
+
+.file-upload-label:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.file-upload-label:active {
+  background-color: #004080; /* Even darker shade on click */
+}
+
+.submitImage { 
+  margin-left: 5px;
+}
+

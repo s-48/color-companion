@@ -251,6 +251,11 @@ body {
     margin-left: 10px;
   }
 
+  .upload-url-container input{ 
+    background-color: #333;
+    border-radius: 5px;
+  }
+
   /* Chat row container */
 .chat-row {
     display: flex; /* Align child divs horizontally */
@@ -288,3 +293,29 @@ body {
     margin: 10px;
   }
   
+  .file-input {
+    display: none; /* Hide the default file input */
+  }
+  
+  .file-upload-container {
+    display: inline-block; /* Keep the label inline for button-like behavior */
+  }
+  
+  .file-upload-label {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #444;
+    color: #FADA7A;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+  }
+  
+  .file-upload-label:hover {
+    background-color: #666; /* Darker shade on hover */
+  }
+  
+  .submitImage { 
+    margin-left: 5px;
+  }
