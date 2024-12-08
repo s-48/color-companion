@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Settings({ personality, setPersonality, colorblindness, setColorblindness }) {
+function Settings({ personality, setPersonality, colorblindness, setColorblindness, toggleDarkMode }) {
   return (
     <div className="settings">
       <div>
@@ -31,8 +31,9 @@ function Settings({ personality, setPersonality, colorblindness, setColorblindne
         </select>
       </div>
       <div className="toggle-darkmode">
-        <label htmlFor="dark-mode-toggle">Dark Mode</label>
-        <input type="checkbox" id="dark-mode-toggle" />
+        <button onClick={toggleDarkMode} style={{ padding: '10px 20px', fontSize: '1rem' }}>
+          Toggle Dark Mode
+        </button>
       </div>
     </div>
   );

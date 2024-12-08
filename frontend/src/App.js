@@ -17,6 +17,7 @@ function App() {
   const [colorblindness, setColorblindness] = useState('none'); // Track settings
   const [showSettings, setShowSettings] = useState(false); // Toggle settings panel visibility
   const [showLiveFeed, setShowLiveFeed] = useState(false); // Toggle settings panel visibility
+  const [darkMode, setDarkMode] = useState(false);
 
   const resetWorkflow = () => {
     setImageUrl(''); // Clear the current image
@@ -26,6 +27,15 @@ function App() {
   // Add a new entry to the chat log
   const addChatEntry = (type, content) => {
     setChatLog((prev) => [...prev, { type, content }]);
+  };
+
+  const toggleDarkMode = () => {
+    const themeStylesheet = document.getElementById('theme-stylesheet');
+    if (themeStylesheet.getAttribute('href') === 'styles.css') {
+      themeStylesheet.setAttribute('href', 'styles-dark.css');
+    } else {
+      themeStylesheet.setAttribute('href', 'styles.css');
+    }
   };
 
   // Scroll to the most recent chat entry
@@ -44,6 +54,7 @@ function App() {
               setPersonality={setPersonality}
               colorblindness={colorblindness}
               setColorblindness={setColorblindness}
+              toggleDarkMode={toggleDarkMode}
             />
           )}
         </div>

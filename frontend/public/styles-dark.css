@@ -1,0 +1,290 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden; /* Prevent scrolling on the body */
+    font-family: 'IBM Plex Mono', monospace;
+    background-color: #121212; /* Dark mode background */
+    color: #E5E5E5; /* Light text for dark mode */
+  }
+  
+  /* Wrapper to center the app */
+  .App-wrapper {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #7E1891; /* Dark background */
+  }
+  
+  /* Main app container */
+  .App {
+    height: 95vh; /* Fixed height */
+    width: 98%;
+    border-radius: 10px;
+    background-color: #1F1F1F; /* Darker background for the app */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8); /* Stronger shadow for dark mode */
+    display: flex;
+    flex-direction: column; /* Stack child elements vertically */
+    overflow: hidden; /* Prevent external content overflow */
+  }
+  
+  /* Welcome message */
+  .chat-entry.welcome {
+    align-self: left; /* Align the welcome message */
+    background-color: #2C2C2C; /* Dark gray background */
+    color: #FADA7A; /* Light text */
+    padding: 8px;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    max-width: 60%; 
+    font-size: 1rem;
+  }
+  
+  /* Chat window for main content */
+  .chat-window {
+    flex: 1; /* Allow chat window to grow and fill remaining space */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevent external overflow */
+    background-color: #222; /* Darker chat background */
+  }
+  
+  /* Chat log container for scrollable content */
+  .chat-log {
+    flex: 1; /* Fill available vertical space */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #1A1A1A; /* Subtle darker background */
+    border-radius: 5px;
+  }
+  
+  /* Individual chat entries */
+  .chat-entry {
+    max-width: 60%;
+    padding: 10px;
+    margin-bottom: 5px;
+    word-wrap: break-word;
+  }
+  
+  .chat-entry.question {
+    align-self: flex-end;
+    background-color: #333; 
+    color: #FADA7A;
+    text-align: right;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+  
+  .chat-entry.answer {
+    align-self: flex-start;
+    background-color: #333;
+    color: #FADA7A;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+  }
+  
+  /* Upload and prompt styling */
+  .upload, .url {
+    margin: 10px 0;
+  }
+  
+  .user-prompt p {
+    margin-bottom: 10px;
+    color: #FADA7A; /* Light text */
+  }
+  
+  button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #444;
+    color: #FADA7A;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+  }
+  
+  button:hover {
+    background-color: #666; /* Slightly lighter hover state */
+  }
+  
+  /* Center the image preview */
+  .chat-entry.image {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    padding: 10px;
+    border-radius: 20px;
+    max-width: 60%; /* Adjust width to match other chat entries */
+    margin: 10px auto; /* Center the chat entry itself */
+    background-color: #2C2C2C; /* Dark background for images */
+  }
+  
+  .chat-entry.image img {
+    max-width: 100%; /* Ensure the image fits within the container */
+    max-height: 300px; /* Optional: Prevent overly large images */
+    border-radius: 10px; /* Add rounded corners to the image */
+  }
+  
+  /* Icon containers */
+  .icon-container img {
+    width: 75px; 
+    height: 75px;
+  }
+  
+  /* Feed Sidebar */
+  .feed-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 640px;
+    height: 100%;
+    background: #1F1F1F; /* Darker background */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.8);
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .feed-sidebar.open {
+    right: 0; /* Slide into view */
+  }
+  
+  /* Settings Sidebar */
+  .settings-sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Start off-screen */
+    width: 350px;
+    height: 100%;
+    background: #1F1F1F; /* Darker background */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.8);
+    transition: left 0.3s ease-in-out;
+    z-index: 1000;
+  }
+  
+  .settings-sidebar.open {
+    left: 0; /* Slide into view */
+  }
+  
+  /* Settings Panel */
+  .settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    padding: 15px;
+    background-color: #1A1A1A; /* Dark settings background */
+    color: #E5E5E5; /* Light text */
+    font-weight: bold;
+  }
+  
+  .settings div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .settings label {
+    margin-bottom: 0.5rem;
+    font-size: 20px;
+    color: #E5E5E5;
+  }
+  
+  .settings select {
+    width: 90%;
+    background-color: #333;
+    color: #E5E5E5;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .settings select:hover {
+    border-color: #777; /* Subtle hover effect */
+  }
+  
+  /* Chat input section */
+  .chat-input {
+    display: flex;
+    justify-content: space-around;
+    flex-shrink: 0;
+    padding: 10px;
+    background-color: #1A1A1A;
+  }
+  
+  .user-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    background-color: #222;
+    border: 1px solid #333;
+    border-radius: 5px;
+  }
+  
+  .upload-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90%;
+  }
+  
+  /* Shared Styling */
+  .upload-url-container, .upload-image-container, .livefeed-container, .settings-container {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    height: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .upload-url-container button {
+    margin-left: 10px;
+  }
+
+  /* Chat row container */
+.chat-row {
+    display: flex; /* Align child divs horizontally */
+    align-items: center; /* Vertically align the items */
+    margin-bottom: 8px; /* Space between entries */
+    gap: 10px; /* Add space between icon and text */
+  }
+  
+  /* Icon container */
+  .icon-container {
+    flex-shrink: 0; /* Prevent the icon from shrinking */
+    margin-right: 10px; /* Space between icon and text */
+  }
+  
+  /* Text container */
+  .text-container {
+    flex-grow: 1; /* Allow text to take up the remaining space */
+    word-wrap: break-word; /* Ensure text wraps correctly */
+  }
+
+  .live-feed { 
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .camera-buttons { 
+    width: 80%; 
+    display: flex; 
+    justify-content: space-around;
+    align-self: center;
+    margin: auto;
+  }
+  
+  .close-btn { 
+    margin: 10px;
+  }
+  
