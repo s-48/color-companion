@@ -299,6 +299,9 @@ canvas {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
+.upload-url-container button{ 
+  margin-left: 10px;
+}
 #ImagePopup.js
 .chat-entry.image {
   transition: all 0.3s ease;
@@ -308,3 +311,19 @@ canvas {
   transition: all 0.3s ease;
 }
 
+.live-feed { 
+  padding: 20px;
+  text-align: center;
+}
+
+.camera-buttons { 
+  width: 80%; 
+  display: flex; 
+  justify-content: space-around;
+  align-self: center;
+  margin: auto;
+}
+
+.close-btn { 
+  margin: 10px;
+}
