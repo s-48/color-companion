@@ -70,10 +70,11 @@ const LiveFeed = () => {
 
   return (
     <div className="live-feed">
-      <h2>Live Camera Feed</h2>
-      <button onClick={startCamera}>Start Camera</button>
-      <button onClick={stopCamera} disabled={!stream}>Stop Camera</button>
-
+        <h2>Live Camera Feed</h2>
+      <div className="camera-buttons">
+        <button onClick={startCamera}>Start Camera</button>
+        <button onClick={stopCamera} disabled={!stream}>Stop Camera</button>
+      </div>
       <div>
         <video
           ref={videoRef}
