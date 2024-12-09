@@ -5,8 +5,6 @@ import UserPrompt from './components/UserPrompt';
 import Settings from './components/Settings';
 import LiveFeed from './components/LiveFeed';
 import ImagePopup from './components/ImagePopup';
-import axios from 'axios';
-
 
 function App() {
   const [imageUrl, setImageUrl] = useState('');
@@ -183,62 +181,6 @@ function App() {
       </div>
     </div>
   );
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  const handleNewUpload = async (event) => {
-    const file = event.target.files[0];
-    if (file) {
-        const formData = new FormData();
-        formData.append('file', file);
-  
-        try {
-            const response = await axios.post('/process-image', formData);
-            const result1 = response.data.result1;
-            const result2 = response.data.result2;
-  
-            setChatLog((prev) => [
-                ...prev,
-                { type: 'image', content: URL.createObjectURL(file) },
-                { type: 'answer', content: result1 },
-                { type: 'answer', content: result2 },
-            ]);
-        } catch (error) {
-            console.error('Upload failed:', error);
-        }
-    }
-  };
-  
-  return (
-    <div>
-        <input
-            type="file"
-            id="new-upload-button"
-            style={{ display: 'none' }}
-            onChange={handleNewUpload}
-        />
-        <label htmlFor="new-upload-button" className="file-upload-label">
-            New Upload
-        </label>
-    </div>
-  );
-
-
 }
-
-
-
 
 export default App;
