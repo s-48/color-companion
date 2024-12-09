@@ -16,6 +16,7 @@ logs/**/*.log
 
 # Backend-specific
 backend/node_modules/
+<<<<<<< HEAD
 backend/.env
 
 # Frontend-specific
@@ -45,3 +46,9 @@ node_modules
 main.9e886929.js
 main.9e886929.js.map
 main.9e886929.js.LICENSE.txt
+=======
+node_modules
+.venv
+.env 
+extension/static/js/
+>>>>>>> 3f8cfc3 (gitignore)
