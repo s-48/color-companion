@@ -1,5 +1,4 @@
 # Color Companion
-![App Logo](frontend/public/Images/Companion.png)
 **Color Companion** is an app designed to help users, especially those with colorblindness, interact with colors effortlessly. From analyzing colors in images to identifying shades in real time, ColorVision Assistant makes colors more accessible and engaging through a chatbot interface.
 
 ---
