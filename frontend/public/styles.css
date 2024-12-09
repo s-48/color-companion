@@ -360,3 +360,16 @@ canvas {
   margin-left: 5px;
 }
 
+.file-upload-label {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  font-family: 'IBM Plex Mono', monospace;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.file-upload-label:hover {
+  background-color: #0056b3;
+}

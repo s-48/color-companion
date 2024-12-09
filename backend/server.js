@@ -69,6 +69,22 @@ app.post('/upload', upload.single('image'), (req, res) => {
   }
 });
 
+
+
+// POST route to upload an image (color assist)
+app.post('/process-image', upload.single('image'), (req, res) => {
+  const file = req.file;
+
+  if (!file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const result1 = `File ${file.originalname} uploaded successfully!`;
+  const result2 = 'This is the second response for the uploaded image.';
+
+  res.json({ result1, result2 });
+});
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
