@@ -20,15 +20,87 @@
 
     // Sliders and Buttons
     panel.innerHTML = `
-      <label>Contrast: <input type="range" id="contrast-slider" min="100" max="300" value="100" step="25"></label><br>
-      <label>Saturation: <input type="range" id="saturation-slider" min="100" max="300" value="100" step="25"></label><br>
-      <label>Hue Rotate: <input type="range" id="hue-slider" min="-180" max="180" value="0" step="20"></label><br>
-      <label>Protanopia: <input type="range" id="protanopia-slider" min="0" max="2" value="0" step="1"></label><br>
-      <label>Deuteranopia: <input type="range" id="deuteranopia-slider" min="0" max="2" value="0" step="1"></label><br>
-      <label>Tritanopia: <input type="range" id="tritanopia-slider" min="0" max="2" value="0" step="1"></label><br>
-      <button id="toggle-effect">Toggle Effect</button>
-      <button id="reset-button">Reset</button>
+      <style>
+        .slider-label {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 5px;
+          align-items: center;
+          color: white;
+        }
+        .slider-range {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          color: white;
+        }
+        .button-container {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+          margin-top: 10px;
+        }
+/*         .button-container button.active {
+          background-color: blue; /* on */
+        }
+        .button-container button.inactive {
+          background-color: orange; /* OFF */
+        } */
+      </style>
+      <label class="slider-label">
+        Contrast : 
+        <input type="range" id="contrast-slider" min="100" max="300" value="100" step="25">
+        <div class="slider-range">
+          <span style="font-size: 8px;">Similar</span>
+          <span style="font-size: 8px;">Different</span>
+        </div>
+      </label>
+      <label class="slider-label">
+        Saturation (Color Intensity): 
+        <input type="range" id="saturation-slider" min="100" max="300" value="100" step="25">
+        <div class="slider-range">
+          <span style="font-size: 8px;">Dull</span>
+          <span style="font-size: 8px;">Vibrant</span>
+        </div>
+      </label>
+      <label class="slider-label">
+        Color Shift: 
+        <input type="range" id="hue-slider" min="-180" max="180" value="0" step="20">
+        <div class="slider-range">
+          <span style="font-size: 8px;">-180 deg</span>
+          <span style="font-size: 8px;">180 deg</span>
+        </div>
+      </label>
+      <label class="slider-label">
+        Protanopia (Red): 
+        <input type="range" id="protanopia-slider" min="0" max="2" value="0" step="1">
+        <div class="slider-range">
+          <span style="font-size: 8px;">None</span>
+          <span style="font-size: 8px;">Severe</span>
+        </div>
+      </label>
+      <label class="slider-label">
+        Deuteranopia (Green): 
+        <input type="range" id="deuteranopia-slider" min="0" max="2" value="0" step="1">
+        <div class="slider-range">
+          <span style="font-size: 8px;">None</span>
+          <span style="font-size: 8px;">Severe</span>
+        </div>
+      </label>
+      <label class="slider-label">
+        Tritanopia (Blue): 
+        <input type="range" id="tritanopia-slider" min="0" max="2" value="0" step="1">
+        <div class="slider-range">
+          <span style="font-size: 8px;">None</span>
+          <span style="font-size: 8px;">Severe</span>
+        </div>
+      </label>
+      <div class="button-container">
+        <button id="toggle-effect">Toggle Effect</button>
+        <button id="reset-button">Reset Sliders</button>
+      </div>
     `;
+  
 
     document.body.appendChild(panel);
 
